@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { useDispatch } from "react-redux";
 import { fetchPopularTvSeries } from "./redux/thunks/series/popular";
+import Pagination from "./components/Pagination";
 
 const Series = () => {
   const popularSeries = useSelector((state: RootState) => state.popularSeries);
@@ -39,26 +40,13 @@ const Series = () => {
                 <Collection items={popularSeries.items} />
               )}
             </div>
-            <div className="flex justify-between pt-4">
-            <button
-              className="border px-2 rounded cursor-pointer"
-              disabled={popularSeries.currentPage === 1}
-              onClick={handlePreviousPageData}
-            >
-              
-              Prev
-            </button>
-            <button
-              className="border px-2 rounded cursor-pointer"
-              disabled={popularSeries.currentPage === popularSeries.totalPages}
-              onClick={handleNextPageData}
-            >
-              
-              Next
-            </button>
+            <Pagination
+              currentPage={popularSeries.currentPage}
+              pageLength={popularSeries.totalPages}
+              handleNextPageData={handleNextPageData}
+              handlePreviousPageData={handlePreviousPageData}
+            />
           </div>
-          </div>
-         
         </main>
       </Navbar>
     </div>
