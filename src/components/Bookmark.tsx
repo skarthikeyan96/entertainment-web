@@ -1,35 +1,54 @@
+//@ts-ignore
+import localforage from "localforage/src/localforage.js"
 import { useEffect, useState } from "react";
+
 
 const Bookmark = (props: any) => {
   const { data } = props;
 
-  const [isItemBookMarked, setItemBookmarked] = useState(false);
+  const [bookmarkStatus, setBookMarkedStatus] = useState(false);
 
-  const localStorageItems = JSON.parse(localStorage.getItem('items') || '[]')
-  const isPresentInLocalStorage = localStorageItems.find((item: {id: string}) => item.id === data.id)
+  const [bookmarks, setBookmarks] = useState([]);
 
-  
   useEffect(() => {
-      if (isItemBookMarked) {
-        localStorageItems.push(data);
-        localStorage.setItem('items', JSON.stringify(localStorageItems))
-      }else{
-        const newData = localStorageItems.filter((item: {id: string}) => item.id !== data.id);
-        localStorage.setItem('items', JSON.stringify(newData))
+    const fetchBookmarks = async () => {
+      const data = await localforage.getItem("movies");
+      setBookmarks(data);
+    };
 
+    fetchBookmarks();
+  }, []);
+
+  const isItemsPresent = bookmarks.find((item:any) => item.id === data.id) ? true : false
+
+  const handleBookmark = async () => {
+    console.log("store the data in localstorage")
+
+    const localStorageItems = await localforage.getItem("movies");
+
+    if(!localStorageItems){
+      localforage.setItem("movies", [data])
+      setBookMarkedStatus(true)
+    }else{
+      const existingData:any = localStorageItems;
+      const filteredData:any = existingData.filter((item: { id: any }) => data.id === item.id);
+      console.log("movie exists" ,filteredData)
+      if(filteredData.length === 0){
+        // movie does not exists in the indexDB 
+        localforage.setItem("movies", ([...existingData, data]))
+        setBookMarkedStatus(!bookmarkStatus)
       }
-      
-
-  }, [isItemBookMarked]);
-
+    }
+  }
+  
   return (
-    <button onClick={() => setItemBookmarked((prevState) => !prevState)}>
+    <button  onClick={handleBookmark}>
       <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
         <path
           d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
           stroke="#FFF"
           stroke-width="1.5"
-          fill={isItemBookMarked || isPresentInLocalStorage? "white" : "none"}
+          fill={bookmarkStatus || isItemsPresent? "white" : "none"}
         ></path>
       </svg>
     </button>
