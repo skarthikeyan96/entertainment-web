@@ -12,10 +12,10 @@ const Collection = (props: any) => {
                     className="relative w-full cursor-pointer mb-4"
                   >
                     <div className="relative w-full rounded-lg">
-                      <div className="">
+                      <div className="relative h-[133px] md:h-[140px] lg:h-[174px]">
                         <img
-                          className="object-cover"
-                          src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+                          className="object-cover min-h-full max-h-full min-w-full"
+                          src={`https://image.tmdb.org/t/p/original/${item.backdrop_path || item.poster_path}`}
                         />
                       </div>
                     </div>
@@ -32,7 +32,7 @@ const Collection = (props: any) => {
                           </p>
                         </div>
                       </div>
-                      <h2 className="md:heading-xs text-ellips w-[150px] truncate text-sm font-bold capitalize text-app-pure-white sm:w-[180px] md:w-[200px] lg:w-[268px]">
+                      <h2 className="md:heading-xs text-ellipsis w-[150px] truncate text-sm font-bold capitalize text-app-pure-white sm:w-[180px] md:w-[200px] lg:w-[268px]">
                         {item.title || item.name}
                       </h2>
                     </div>

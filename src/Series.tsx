@@ -7,7 +7,6 @@ import { fetchPopularTvSeries } from "./redux/thunks/series/popular";
 
 const Series = () => {
   const popularSeries = useSelector((state: RootState) => state.popularSeries);
-
   const dispatch = useDispatch<AppDispatch>();
 
   const handleNextPageData = () => {
@@ -40,25 +39,26 @@ const Series = () => {
                 <Collection items={popularSeries.items} />
               )}
             </div>
-          </div>
-          <div className="flex justify-between pt-4">
+            <div className="flex justify-between pt-4">
             <button
               className="border px-2 rounded cursor-pointer"
               disabled={popularSeries.currentPage === 1}
               onClick={handlePreviousPageData}
             >
-              {" "}
-              Prev{" "}
+              
+              Prev
             </button>
             <button
               className="border px-2 rounded cursor-pointer"
               disabled={popularSeries.currentPage === popularSeries.totalPages}
               onClick={handleNextPageData}
             >
-              {" "}
-              Next{" "}
+              
+              Next
             </button>
           </div>
+          </div>
+         
         </main>
       </Navbar>
     </div>
