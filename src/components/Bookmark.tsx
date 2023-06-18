@@ -13,7 +13,12 @@ const Bookmark = (props: any) => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       const data = await localforage.getItem("movies");
-      setBookmarks(data);
+      if(!data){
+        setBookmarks([])
+      }else{
+        setBookmarks(data);
+
+      }
     };
 
     fetchBookmarks();
