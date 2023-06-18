@@ -1,13 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import movieSlice from './slices/movies';
-import trendingSeries from './slices/trendingSeries';
+import trendingSeries from './slices/popularSeries';
 import airingTodayTVSlice from './slices/airingToday';
 import all from './slices/all'; // get both trending tv and movies data
+import popularSeries from './slices/popularSeries';
 
 export const store = configureStore({
   reducer: {
     movies: movieSlice,
-    trendingSeries: trendingSeries,
+    popularSeries: popularSeries,
     airingTodaySeries: airingTodayTVSlice,
     trending: all
   },

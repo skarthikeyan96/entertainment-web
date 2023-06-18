@@ -7,17 +7,17 @@ import Bookmarks from "./Bookmarks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchNowPlayingMovies } from "./redux/thunks/movies/nowPlaying";
-import { fetchTrendingTVseries } from "./redux/thunks/series/trending";
 import { AppDispatch } from "./redux/store";
 import { fetchAiringTodaySeries } from "./redux/thunks/series/airingToday";
 import { fetchTrending } from "./redux/thunks/all";
+import { fetchPopularTvSeries } from "./redux/thunks/series/popular";
 
 const App = () => {
   const reduxDispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     reduxDispatch(fetchNowPlayingMovies());
-    reduxDispatch(fetchTrendingTVseries());
+    reduxDispatch(fetchPopularTvSeries(1));
     reduxDispatch(fetchAiringTodaySeries());
     reduxDispatch(fetchTrending());
 
