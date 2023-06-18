@@ -16,6 +16,7 @@ export const initalState: any = {
           ...state,
           loading: true,
         };
+        // all
       case "SUCCESS_TRENDING_DATA":
         return {
           ...state,
@@ -23,6 +24,7 @@ export const initalState: any = {
           trendingData: [...state.trendingData, ...action.trendingData],
         };
   
+        // movie
       case "SUCCESS_NOW_PLAYING_DATA":
         return {
           ...state,
@@ -30,6 +32,7 @@ export const initalState: any = {
           nowPlaying: [...state.nowPlaying, ...action.nowPlaying],
         };
   
+        // tv
       case "SUCCESS_AIRING_TODAY_DATA":
         return {
           ...state,
@@ -38,6 +41,7 @@ export const initalState: any = {
         };
 
 
+        // tv
       case "SUCCESS_TRENDING_TV_SHOWS":
         return {
           ...state,

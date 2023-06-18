@@ -33,3 +33,22 @@ export const MovieSvg = () => (
       />
     </svg>
   );
+
+
+  export const trendingUrl =
+  "https://api.themoviedb.org/3/trending/all/day?language=en-US";
+
+  export const nowPlayingUrl =
+  "https://api.themoviedb.org/3/movie/now_playing?language=en-US";
+
+  export const airingTodayUrl = "https://api.themoviedb.org/3/tv/airing_today?language=en-US";
+
+  export const trendingTvShows = 'https://api.themoviedb.org/3/trending/tv/day?language=en-US';
+
+  export const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.VITE_MOVIE_API_KEY}`,
+  },
+};

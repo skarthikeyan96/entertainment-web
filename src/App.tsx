@@ -7,28 +7,31 @@ import Bookmarks from "./Bookmarks";
 import { useEffect, useReducer } from "react";
 import { reducer, initalState } from "./Reducer";
 import axios from 'axios'
+import { trendingUrl, options, nowPlayingUrl, airingTodayUrl, trendingTvShows } from "./constants";
+import {useDispatch} from 'react-redux'
+import { fetchNowPlayingMovies } from "./redux/thunks/movies/nowPlaying";
+import { fetchTrendingTVseries } from "./redux/thunks/series/trending";
+import { AppDispatch } from "./redux/store";
+import { fetchAiringTodaySeries } from "./redux/thunks/series/airingToday";
+import { fetchTrending } from "./redux/thunks/all";
 
 const App = () => {
 
-  const trendingUrl =
-  "https://api.themoviedb.org/3/trending/all/day?language=en-US";
-
-const nowPlayingUrl =
-  "https://api.themoviedb.org/3/movie/now_playing?language=en-US";
-
-const airingTodayUrl = "https://api.themoviedb.org/3/tv/airing_today?language=en-US";
-
-const trendingTvShows = 'https://api.themoviedb.org/3/trending/tv/day?language=en-US';
-
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.VITE_MOVIE_API_KEY}`,
-  },
-};
 
 const [state, dispatch] = useReducer(reducer, initalState);
+
+const reduxDispatch = useDispatch<AppDispatch>()
+
+useEffect(() => {
+  reduxDispatch(fetchNowPlayingMovies())
+  reduxDispatch(fetchTrendingTVseries())
+  reduxDispatch(fetchAiringTodaySeries())
+  reduxDispatch(fetchTrending())
+
+  return () => {
+    
+  }
+}, [reduxDispatch])
 
 useEffect(() => {
   dispatch({ type: "CALL_API" });
@@ -45,6 +48,7 @@ useEffect(() => {
     dispatch({ type: "ERROR", error: response.toJSON() });
   };
 
+  // ✅
   const fetchNowPlayingResults = async () => {
     const response: any = await axios.get(nowPlayingUrl, options);
 
@@ -58,6 +62,7 @@ useEffect(() => {
     dispatch({ type: "ERROR", error: response.toJSON() });
   };
 
+    // ✅
   const fetchAiringTodayTvShows = async () => {
     const response: any = await axios.get(airingTodayUrl, options);
 
@@ -71,6 +76,7 @@ useEffect(() => {
     dispatch({ type: "ERROR", error: response.toJSON() });
   };
 
+  // ✅
   const fetchTrendingTV = async () => {
     const response: any = await axios.get(trendingTvShows, options);
 
