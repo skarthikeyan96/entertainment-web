@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import { fetchTrendingTVseries } from '../thunks/series/trending'
 
 const initialState = {
-    trending: [],
+    items: [],
     isLoading: false,
     error: ''
 }
@@ -17,7 +17,7 @@ const trendingTVSlice = createSlice({
           })
           builder.addCase(fetchTrendingTVseries.fulfilled, (state, action) => {
             state.isLoading = false
-            state.trending = action.payload
+            state.items = action.payload
           })
           builder.addCase(fetchTrendingTVseries.rejected, (state, action) => {
             state.isLoading = false

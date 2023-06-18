@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import { fetchNowPlayingMovies } from '../thunks/movies/nowPlaying'
 
 const initialState = {
-    nowPlaying: [],
+    items: [],
     isLoading: false,
     error: ''
 }
@@ -17,7 +17,7 @@ const movieSlice = createSlice({
           })
           builder.addCase(fetchNowPlayingMovies.fulfilled, (state, action) => {
             state.isLoading = false
-            state.nowPlaying = action.payload
+            state.items = action.payload
           })
           builder.addCase(fetchNowPlayingMovies.rejected, (state, action) => {
             state.isLoading = false

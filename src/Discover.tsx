@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import Collection from "./components/Collection";
 import CollectionSlider from "./components/CollectionSlider";
 import Navbar from "./components/Navbar";
+import { RootState } from "./redux/store";
 
-const Discover = (props: any) => {
+const Discover = () => {
  
-    const {loading,airingToday=[],trending=[], nowPlaying=[]} = props;
+ const trending = useSelector((state: RootState) => state.trending)
+ const movies = useSelector((state: RootState) => state.movies)
+ const airingTodaySeries = useSelector((state: RootState) => state.airingTodaySeries)
 
   return (
     <>
@@ -16,9 +20,9 @@ const Discover = (props: any) => {
                 Trending
               </h1>
               <div className="overflow-auto whitespace-nowrap flex gap-x-4 ml-4 md:ml-0 overflow-y-hidden">
-                {loading
+                {trending.isLoading
                   ? "loading ..."
-                  : <CollectionSlider data={trending}/>
+                  : <CollectionSlider data={trending.items}/>
                 }
               </div>
             </div>
@@ -31,9 +35,9 @@ const Discover = (props: any) => {
                 </span>
               </div>
               <div className="grid gap-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-4 lg:grid-cols-4">
-                {loading
+                {movies.isLoading
                   ? "loading ..."
-                  : <Collection items={nowPlaying}/>
+                  : <Collection items={movies.items}/>
                 }
               </div>
             </div>
@@ -46,9 +50,9 @@ const Discover = (props: any) => {
                 </span>
               </div>
               <div className="grid gap-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-4 lg:grid-cols-4">
-                {loading
+                {airingTodaySeries.isLoading
                   ? "loading ..."
-                  : <Collection items={airingToday}/>
+                  : <Collection items={airingTodaySeries.items}/>
                 }
               </div>
             </div>
