@@ -11,7 +11,7 @@ export const store = configureStore({
     popularSeries: popularSeries,
     airingTodaySeries: airingTodayTVSlice,
     trending: all,
-    popularMovies: popularMovies
+    popularMovies: popularMovies,
   },
 })
 

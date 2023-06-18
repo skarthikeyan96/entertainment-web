@@ -1,31 +1,35 @@
+import { useEffect, useState } from "react";
+
 const Bookmark = (props: any) => {
   const { data } = props;
-  const bookMarks: any[] = [];
-  const bookmarkedItems: any = JSON.parse(
-    localStorage.getItem("items") || "[]"
-  );
 
-  const isItemBookmarked = bookmarkedItems.find((item: any) => item.title === data.title)
+  const [isItemBookMarked, setItemBookmarked] = useState(false);
 
-  const handleAddBookMark = (data: any) => {
-    
-    if (bookmarkedItems.length === 0) {
-      bookMarks.push(data);
-      localStorage.setItem("items", JSON.stringify(bookMarks));
-    } else {
-      bookmarkedItems.push(data);
-      localStorage.setItem("items", JSON.stringify(bookmarkedItems));
-    }
-  };
+  const localStorageItems = JSON.parse(localStorage.getItem('items') || '[]')
+  const isPresentInLocalStorage = localStorageItems.find((item: {id: string}) => item.id === data.id)
+
+  
+  useEffect(() => {
+      if (isItemBookMarked) {
+        localStorageItems.push(data);
+        localStorage.setItem('items', JSON.stringify(localStorageItems))
+      }else{
+        const newData = localStorageItems.filter((item: {id: string}) => item.id !== data.id);
+        localStorage.setItem('items', JSON.stringify(newData))
+
+      }
+      
+
+  }, [isItemBookMarked]);
 
   return (
-    <button onClick={() => handleAddBookMark(data)}>
+    <button onClick={() => setItemBookmarked((prevState) => !prevState)}>
       <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
         <path
           d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
           stroke="#FFF"
           stroke-width="1.5"
-          fill={isItemBookmarked ? "white" : "none"}
+          fill={isItemBookMarked || isPresentInLocalStorage? "white" : "none"}
         ></path>
       </svg>
     </button>

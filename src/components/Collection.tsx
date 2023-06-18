@@ -1,3 +1,5 @@
+import Bookmark from "./Bookmark";
+
 const Collection = (props: any) => {
   const { items } = props;
 
@@ -17,22 +19,8 @@ const Collection = (props: any) => {
               </div>
             </div>
             <div className="absolute top-2.5 right-3.5">
-              <button>
-                <svg
-                  width="12"
-                  height="14"
-                  xmlns="http://www.w3.org/2000/svg"
-                  
-                >
-                  <path
-                    d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
-                    stroke="#FFF"
-                    stroke-width="1.5"
-                    fill="none"
-                  ></path>
-                </svg>
-              </button>
-            </div>
+              <Bookmark data={item}/>
+              </div>
             <div>
               <div className="mt-2 mb-1 flex text-[11px] font-light md:text-[13px]">
                 <div className="flex gap-x-4 items-center">
