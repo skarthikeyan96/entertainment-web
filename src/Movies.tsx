@@ -42,7 +42,7 @@ const Movies = () => {
                 {popularMovies.isLoading ? (
                   "loading ..."
                 ) : (
-                  <Collection items={popularMovies.items} />
+                  <Collection media_type="movie" items={popularMovies.items} />
                 )}
               </div>
               <Pagination

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MovieSvg, TvSvg } from "../constants";
 import Bookmark from "./Bookmark";
 
@@ -7,6 +8,7 @@ const CollectionSlider = (props: any) => {
     <>
       {data.map((data: any, idx: number) => {
         return (
+          <Link to={`/${data.media_type}/${data.id}`}>
           <div key={idx} className="relative w-full cursor-pointer">
             <div className="relative w-full rounded-lg">
               <div className="relative h-[140px] w-[240px] sm:h-[230px] sm:w-[470px] opacity-50 ">
@@ -35,6 +37,7 @@ const CollectionSlider = (props: any) => {
               </div>
             </div>
           </div>
+          </Link>
         );
       })}
     </>

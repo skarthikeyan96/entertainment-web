@@ -37,7 +37,7 @@ const Discover = () => {
               <div className="grid gap-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-4 lg:grid-cols-4">
                 {movies.isLoading
                   ? "loading ..."
-                  : <Collection items={movies.items}/>
+                  : <Collection media_type="movie" items={movies.items}/>
                 }
               </div>
             </div>
@@ -52,7 +52,7 @@ const Discover = () => {
               <div className="grid gap-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-4 lg:grid-cols-4">
                 {airingTodaySeries.isLoading
                   ? "loading ..."
-                  : <Collection items={airingTodaySeries.items}/>
+                  : <Collection media_type="tv" items={airingTodaySeries.items}/>
                 }
               </div>
             </div>

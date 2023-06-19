@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import Bookmark from "./Bookmark";
 
 const Collection = (props: any) => {
-  const { items } = props;
+  const { items, media_type } = props;
 
   return (
     <>
       {items.map((item: any, idx: number) => {
         return (
+          <Link to={`/${media_type}/${item.id}`}>
           <div key={idx} className="relative w-full cursor-pointer mb-4">
             <div className="relative w-full rounded-lg">
               <div className="relative h-[133px] md:h-[140px] lg:h-[174px]">
@@ -37,6 +39,8 @@ const Collection = (props: any) => {
               </h2>
             </div>
           </div>
+          </Link>
+          
         );
       })}
     </>

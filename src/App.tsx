@@ -11,6 +11,8 @@ import { AppDispatch } from "./redux/store";
 import { fetchAiringTodaySeries } from "./redux/thunks/series/airingToday";
 import { fetchTrending } from "./redux/thunks/all";
 import { fetchPopularTvSeries } from "./redux/thunks/series/popular";
+import Movie from "./Movie";
+import TV from "./TV";
 
 const App = () => {
   const reduxDispatch = useDispatch<AppDispatch>();
@@ -28,9 +30,12 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Discover />} />
-        <Route path="series" element={<Series />} />
+        <Route path="/series" element={<Series />} />
         <Route path="movies" element={<Movies />} />
-        <Route path="bookmarks" element={<Bookmarks />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route path="/movie/:id" element={<Movie/>}/>
+        <Route path="/tv/:id" element={<TV/>}/>
+
       </Routes>
     </>
   );
