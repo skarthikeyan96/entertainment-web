@@ -28,7 +28,7 @@ const Bookmarks = () => {
               </span>
             </div>
             <div className="grid gap-4 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-4 lg:grid-cols-4">
-              <Collection items={bookmarks} />
+              <Collection items={bookmarks || []} />
             </div>
           </div>
         </main>
